@@ -1,24 +1,63 @@
-import { styled } from '../styles'
-
-const Button = styled('button', {
-  backgroundColor: '$rocketSeat',
-  color: '#fff',
-  padding: '1.5rem 1.5rem',
-
-  'span:nth-of-type(2):hover': {
-    color: 'navy',
-    fontSize: 30,
-  },
-})
+import Image from 'next/image'
+import { HomeContainer, Product } from '../styles/pages/home'
+import camisetaExplore from '../assets/2_explorer-t-shirt 1.png'
+import camisetaMarotana from '../assets/Camisa-Maratona 1.png'
+import camisetaIgniteLab from '../assets/IgniteLab.png'
+import camisetaIgniterAboard from '../assets/Igniter-abord.png'
 
 export default function Home() {
+  console.log(camisetaIgniterAboard)
+
   return (
-    <>
-      <h1>Hello World</h1>
-      <Button>
-        <span>Para</span>Enviar
-        <span>Local</span>
-      </Button>
-    </>
+    <HomeContainer>
+      <Product>
+        <Image
+          src={camisetaExplore}
+          width={520}
+          height={480}
+          alt="Camiseta da Rocketseat"
+        />
+        <footer>
+          <strong>Camiseta Explore</strong>
+          <span>R$ 79.99</span>
+        </footer>
+      </Product>
+      <Product>
+        <Image
+          src={camisetaMarotana}
+          width={520}
+          height={480}
+          alt="Camiseta da Rocketseat"
+        />
+        <footer>
+          <strong>Camiseta Marotana</strong>
+          <span>R$ 79.99</span>
+        </footer>
+      </Product>
+      {/* <Product>
+        <Image
+          src={camisetaIgniteLab}
+          width={520}
+          height={480}
+          alt="Camiseta da Rocketseat"
+        />
+        <footer>
+          <strong>Camiseta Ignite Lab</strong>
+          <span>R$ 79.99</span>
+        </footer>
+      </Product>
+      <Product>
+        <Image
+          src={camisetaIgniterAboard}
+          width={520}
+          height={480}
+          alt="Camiseta da Rocketseat"
+        />
+        <footer>
+          <strong>Camiseta Ignite Aboard</strong>
+          <span>R$ 79.99</span>
+        </footer>
+      </Product> */}
+    </HomeContainer>
   )
 }

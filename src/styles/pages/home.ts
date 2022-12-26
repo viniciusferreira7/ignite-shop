@@ -48,7 +48,6 @@ export const Product = styled(Link, {
 
     strong: {
       fontSize: '$lg',
-      color: '$white',
     },
 
     span: {

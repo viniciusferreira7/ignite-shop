@@ -15,6 +15,7 @@ export const Product = styled(Link, {
   borderRadius: 8,
   cursor: 'pointer',
   position: 'relative',
+
   textDecoration: 'none',
 
   display: 'flex',
@@ -48,6 +49,7 @@ export const Product = styled(Link, {
 
     strong: {
       fontSize: '$lg',
+      color: '$white',
     },
 
     span: {

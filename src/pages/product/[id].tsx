@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 
 import React from 'react'
 
@@ -9,7 +8,7 @@ import {
   ProductDetails,
 } from '../../styles/pages/product'
 
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { stripe } from '../../lib/stripe'
 import Stripe from 'stripe'
 
@@ -39,13 +38,23 @@ export default function Product({ product }: ProductProps) {
   )
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      { params: { id: 'prod_MtoR65BzaToHmj' } },
+      { params: { id: 'prod_MtoQuy7ZFIGltE' } },
+    ],
+    fallback: false,
+  }
+}
+
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => {
-  const productId = params?.id ? params.id : '' // type guard
+  const productId = params?.id ? params.id : '' // use type guard or type assertion = params!.id
 
   const product = await stripe.products.retrieve(productId, {
-    expand: ['default.price'],
+    expand: ['default_price'],
   })
 
   const price = product.default_price as Stripe.Price

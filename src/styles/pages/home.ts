@@ -60,6 +60,11 @@ export const Product = styled(Link, {
   },
 
   '&:hover': {
+    svg: {
+      transform: 'translateY(0%)',
+      opacity: 1,
+    },
+
     footer: {
       transform: 'translateY(0%)',
       opacity: 1,

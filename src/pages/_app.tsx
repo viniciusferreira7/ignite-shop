@@ -3,6 +3,8 @@ import Image from 'next/image'
 
 import { CartProvider } from 'use-shopping-cart'
 
+import { Handbag } from 'phosphor-react'
+
 import { globalStyles } from '../styles/global'
 import logoImg from '../assets/logo.svg'
 import { Container, Header } from '../styles/pages/app'
@@ -20,6 +22,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Container>
         <Header>
           <Image src={logoImg} alt="Logo do ignite" />
+          <div>
+            <Handbag size={24} weight="regular" />
+          </div>
         </Header>
         <Component {...pageProps} />
       </Container>

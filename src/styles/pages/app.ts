@@ -1,3 +1,5 @@
+import * as Dialog from '@radix-ui/react-dialog'
+
 import { styled } from '..'
 
 export const Container = styled('div', {
@@ -17,23 +19,24 @@ export const Header = styled('header', {
   width: '100%',
   maxWidth: 1180,
   margin: '0 auto',
+})
 
-  div: {
-    backgroundColor: '$gray800',
-    borderRadius: '6px',
-    padding: '1.10rem 0.85rem 0.91rem 0.85rem',
+export const TriggerIcon = styled(Dialog.Trigger, {
+  backgroundColor: '$gray800',
+  border: 'none',
+  borderRadius: '6px',
+  padding: '1.10rem 0.85rem 0.91rem 0.85rem',
 
-    cursor: 'pointer',
+  cursor: 'pointer',
 
+  svg: {
+    color: '$gray500',
+  },
+
+  '&:hover': {
     svg: {
-      color: '$gray500',
-    },
-
-    '&:hover': {
-      svg: {
-        transition: 'all 0.2s ease-in-out ',
-        color: '$gray300',
-      },
+      transition: 'all 0.2s ease-in-out ',
+      color: '$gray300',
     },
   },
 })

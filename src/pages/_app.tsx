@@ -2,12 +2,14 @@ import type { AppProps } from 'next/app'
 import Image from 'next/image'
 
 import { CartProvider } from 'use-shopping-cart'
+import * as Dialog from '@radix-ui/react-dialog'
 
 import { Handbag } from 'phosphor-react'
 
 import { globalStyles } from '../styles/global'
 import logoImg from '../assets/logo.svg'
-import { Container, Header } from '../styles/pages/app'
+import { Container, Header, TriggerIcon } from '../styles/pages/app'
+import { DialogCart } from '../components/DialogCart'
 
 globalStyles()
 
@@ -22,9 +24,13 @@ export default function App({ Component, pageProps }: AppProps) {
       <Container>
         <Header>
           <Image src={logoImg} alt="Logo do ignite" />
-          <div>
-            <Handbag size={24} weight="regular" />
-          </div>
+          <Dialog.Root>
+            <TriggerIcon>
+              {/* O modal não está funcionando */}
+              <Handbag size={24} weight="regular" />
+            </TriggerIcon>
+            <DialogCart />
+          </Dialog.Root>
         </Header>
         <Component {...pageProps} />
       </Container>

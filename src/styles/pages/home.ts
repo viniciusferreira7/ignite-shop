@@ -37,25 +37,47 @@ export const Product = styled(Link, {
 
     borderRadius: 6,
 
-    display: 'flex',
-    alignItems: 'center',
+    display: 'grid',
+    gridTemplateAreas: `'name hadBag '
+                        'price hadBag'`,
     justifyContent: 'space-between',
-
-    backgroundColor: 'rgba(0,0,0, 0.6)',
+    alignItems: 'center',
+    backgroundColor: '$gray800',
 
     transform: 'translateY(110%)',
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
 
     strong: {
+      gridArea: 'name',
       fontSize: '$lg',
       color: '$white',
     },
 
     span: {
+      gridArea: 'price',
       fontSize: '$xl',
       fonWeight: 'bold',
       color: '$green300',
+    },
+
+    div: {
+      gridArea: 'hadBag',
+
+      width: '3.5rem',
+      height: '3.5rem',
+      padding: '0.75rem',
+      borderRadius: '6px',
+      backgroundColor: '$green500',
+
+      svg: {
+        color: '$white',
+      },
+
+      '&:hover': {
+        transaction: 'all 0.2s ease-in-out',
+        backgroundColor: '$green300',
+      },
     },
   },
 

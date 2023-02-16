@@ -1,7 +1,6 @@
-import * as Dialog from '@radix-ui/react-dialog'
 import { styled } from '../../styles'
 
-export const DialogCartContainer = styled(Dialog.Content, {
+export const DialogCartContainer = styled('div', {
   width: '100%',
   backgroundColor: 'red',
 })

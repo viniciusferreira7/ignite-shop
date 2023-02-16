@@ -15,7 +15,7 @@ globalStyles()
 export default function App({ Component, pageProps }: AppProps) {
   const [cartIsOpen, setCartIsOpen] = useState(false)
 
-  function handleCartButton() {
+  function handleCart() {
     setCartIsOpen((state) => !state)
   }
 
@@ -29,13 +29,13 @@ export default function App({ Component, pageProps }: AppProps) {
       <Container>
         <Header>
           <Image src={logoImg} alt="Logo do ignite" />
-          <TriggerIcon onClick={handleCartButton}>
+          <TriggerIcon onClick={handleCart}>
             <Handbag size={24} weight="regular" />
           </TriggerIcon>
         </Header>
         <Component {...pageProps} />
       </Container>
-      <DialogCart cartIsOpen={cartIsOpen} />
+      <DialogCart cartIsOpen={cartIsOpen} handleCart={handleCart} />
     </CartProvider>
   )
 }

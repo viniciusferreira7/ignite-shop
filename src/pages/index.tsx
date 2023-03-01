@@ -30,7 +30,7 @@ export default function Home({ product }: HomeProps) {
     breakpoints: {
       '(max-width:768px)': {
         slides: {
-          perView: 1,
+          perView: 1.25,
           spacing: 32,
         },
       },

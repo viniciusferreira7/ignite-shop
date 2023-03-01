@@ -8,6 +8,11 @@ export const HomeContainer = styled('main', {
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   minHeight: 656,
   marginLeft: 'auto',
+
+  '@bp1': {
+    maxWidth: 'none',
+    marginLeft: '0',
+  },
 })
 
 export const Product = styled(Link, {

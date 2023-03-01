@@ -17,6 +17,10 @@ export const Header = styled('header', {
   width: '100%',
   maxWidth: 1180,
   margin: '0 auto',
+
+  '@bp1': {
+    padding: '2rem 1rem',
+  },
 })
 
 export const TriggerIcon = styled('div', {

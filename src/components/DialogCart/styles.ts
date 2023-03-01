@@ -43,6 +43,11 @@ export const ItemsContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: '1.47rem',
+
+  height: '28rem',
+  marginBottom: '1.68rem',
+
+  overflow: 'auto',
 })
 
 export const Item = styled('div', {
@@ -80,5 +85,67 @@ export const Item = styled('div', {
 
     background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
     borderRadius: '8px',
+  },
+})
+
+export const TotalContainer = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gap: '0.43rem',
+  justifyContent: 'space-between',
+
+  marginBottom: '3.56rem',
+
+  'p:nth-of-type(even)': {
+    textAlign: 'right',
+  },
+
+  'p:nth-of-type(1)': {
+    fontSize: '1rem',
+    color: '$gray100',
+  },
+
+  'p:nth-of-type(2)': {
+    fontSize: '$md',
+    color: '$gray300',
+  },
+
+  'p:nth-of-type(3)': {
+    fontSize: '$md',
+    color: '$gray100',
+    fontWeight: '700',
+  },
+
+  'p:nth-of-type(4)': {
+    fontSize: '$xl',
+    color: '$gray100',
+    fontWeight: '700',
+  },
+})
+
+export const FinishButton = styled('button', {
+  all: 'unset',
+
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  maxWidth: '24rem',
+  width: '100%',
+  minHeight: '4.31rem',
+  borderRadius: '8px',
+
+  backgroundColor: '$green500',
+
+  cursor: 'pointer',
+
+  strong: {
+    color: '$white',
+    fontSize: '$lg',
+  },
+
+  '&:hover': {
+    transaction: 'all 0.2s ease-in-out',
+    backgroundColor: '$green300',
   },
 })

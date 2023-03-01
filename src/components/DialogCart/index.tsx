@@ -1,20 +1,30 @@
 import { X } from 'phosphor-react'
-import { DialogCartContainer, Item, ItemsContainer, Overlay } from './styles'
+import {
+  DialogCartContainer,
+  FinishButton,
+  Item,
+  ItemsContainer,
+  Overlay,
+  TotalContainer,
+} from './styles'
 
 interface DialogCartProps {
   cartIsOpen: boolean
-  handleCart: () => void
+  handleCloseOrOpenCart: () => void
 }
 
-export function DialogCart({ cartIsOpen, handleCart }: DialogCartProps) {
+export function DialogCart({
+  cartIsOpen,
+  handleCloseOrOpenCart,
+}: DialogCartProps) {
   return (
     <>
       {cartIsOpen ? (
         <>
-          <Overlay onClick={handleCart} />
+          <Overlay onClick={handleCloseOrOpenCart} />
           <DialogCartContainer>
             <div>
-              <X size={24} />
+              <X size={24} onClick={handleCloseOrOpenCart} />
             </div>
             <h2>Sacola de compras</h2>
             <ItemsContainer>
@@ -24,7 +34,22 @@ export function DialogCart({ cartIsOpen, handleCart }: DialogCartProps) {
                 <h3>R$ 79,90</h3>
                 <button>Remover</button>
               </Item>
+              <Item>
+                <div />
+                <h4>Camiseta Beyond the Limits</h4>
+                <h3>R$ 79,90</h3>
+                <button>Remover</button>
+              </Item>
             </ItemsContainer>
+            <TotalContainer>
+              <p>Quantidade</p>
+              <p>3 itens</p>
+              <p>Valor total</p>
+              <p>R$ 270,00</p>
+            </TotalContainer>
+            <FinishButton>
+              <strong>Finalizar compra</strong>
+            </FinishButton>
           </DialogCartContainer>
         </>
       ) : null}

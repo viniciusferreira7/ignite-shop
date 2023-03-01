@@ -3,7 +3,7 @@ import { styled } from '../../styles'
 export const DialogCartContainer = styled('div', {
   width: '100%',
   maxWidth: '30rem',
-  height: '100vh',
+  minHeight: '100vh',
   padding: '1.5rem 1.5rem 3rem 3rem',
 
   backgroundColor: '$gray800',
@@ -25,6 +25,10 @@ export const DialogCartContainer = styled('div', {
   h2: {
     margin: '1.5rem 0 2rem 0',
     fontSize: '1.25rem',
+  },
+
+  '@bp1': {
+    padding: '1.5rem',
   },
 })
 
@@ -48,6 +52,10 @@ export const ItemsContainer = styled('div', {
   marginBottom: '1.68rem',
 
   overflow: 'auto',
+
+  '@bp1': {
+    height: '21rem',
+  },
 })
 
 export const Item = styled('div', {
@@ -85,6 +93,12 @@ export const Item = styled('div', {
 
     background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
     borderRadius: '8px',
+  },
+
+  '@bp1': {
+    div: {
+      marginRight: '1rem',
+    },
   },
 })
 

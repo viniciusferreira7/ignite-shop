@@ -8,6 +8,13 @@ export const ProductContainer = styled('main', {
 
   maxWidth: 1180,
   margin: '0 auto',
+
+  '@media screen and (max-width:768px)': {
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
+
+    padding: '0 2rem',
+  },
 })
 
 export const ImageContainer = styled('div', {
@@ -25,6 +32,16 @@ export const ImageContainer = styled('div', {
 
   img: {
     objectFit: 'cover',
+  },
+
+  '@media screen and (max-width:768px)': {
+    maxWidth: 476,
+    height: 356,
+
+    img: {
+      width: 260,
+      height: 240,
+    },
   },
 })
 
@@ -70,6 +87,17 @@ export const ProductDetails = styled('div', {
     '&:not(:disabled):hover': {
       transaction: 'all 2.2s ease-in-out',
       backgroundColor: '$green300',
+    },
+  },
+
+  '@media screen and (max-width:768px)': {
+    p: {
+      marginTop: '1rem',
+      fontSize: '$lg',
+    },
+
+    button: {
+      marginTop: '1rem',
     },
   },
 })

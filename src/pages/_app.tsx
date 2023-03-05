@@ -1,14 +1,12 @@
 import type { AppProps } from 'next/app'
-import Image from 'next/image'
 
 import { CartProvider } from 'use-shopping-cart'
 
 import { globalStyles } from '../styles/global'
-import logoImg from '../assets/logo.svg'
-import { Container, Header, TriggerIcon } from '../styles/pages/app'
+import { Container } from '../styles/pages/app'
 import { DialogCart } from '../components/DialogCart'
-import { Handbag } from 'phosphor-react'
 import { useState } from 'react'
+import { Header } from '../components/Header'
 
 globalStyles()
 
@@ -20,9 +18,8 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    // adicionar itens no carrinho
     // remover itens do carrinho
-    // Problema ao clicar no handBag do produto, já e redirecionado para pagina especifica do produto
+    // Problema do cartCount e resetado ao ir para pagina especifica
     <CartProvider
       shouldPersist={false}
       currency="BRL"
@@ -30,12 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
       stripe={process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string}
     >
       <Container>
-        <Header>
-          <Image src={logoImg} alt="Logo do ignite" />
-          <TriggerIcon onClick={handleCloseOrOpenCart}>
-            <Handbag size={24} weight="regular" />
-          </TriggerIcon>
-        </Header>
+        <Header handleCloseOrOpenCart={handleCloseOrOpenCart} />
         <Component {...pageProps} />
       </Container>
       <DialogCart

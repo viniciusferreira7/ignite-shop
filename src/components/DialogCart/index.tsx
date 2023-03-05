@@ -1,4 +1,8 @@
+import Image from 'next/image'
 import { X } from 'phosphor-react'
+import { useEffect, useState } from 'react'
+import { useShoppingCart } from 'use-shopping-cart'
+import { CartDetails, CartEntry } from 'use-shopping-cart/core'
 import {
   DialogCartContainer,
   FinishButton,
@@ -7,6 +11,15 @@ import {
   Overlay,
   TotalContainer,
 } from './styles'
+
+type ProductType = {
+  id: string
+  sku: string
+  name: string
+  imageUrl: string
+  price: number
+  currency: string
+}
 
 interface DialogCartProps {
   cartIsOpen: boolean
@@ -17,6 +30,17 @@ export function DialogCart({
   cartIsOpen,
   handleCloseOrOpenCart,
 }: DialogCartProps) {
+  const { cartDetails } = useShoppingCart()
+  const [allProducts, setAllProducts] = useState<(ProductType | CartEntry)[]>(
+    [],
+  )
+
+  useEffect(() => {
+    for (const [key, value] of Object.entries(cartDetails as CartDetails)) {
+      setAllProducts((state) => [...state, value])
+    }
+  }, [cartDetails])
+
   return (
     <>
       {cartIsOpen ? (
@@ -28,18 +52,21 @@ export function DialogCart({
             </div>
             <h2>Sacola de compras</h2>
             <ItemsContainer>
-              <Item>
-                <div />
-                <h4>Camiseta Beyond the Limits</h4>
-                <h3>R$ 79,90</h3>
-                <button>Remover</button>
-              </Item>
-              <Item>
-                <div />
-                <h4>Camiseta Beyond the Limits</h4>
-                <h3>R$ 79,90</h3>
-                <button>Remover</button>
-              </Item>
+              {allProducts.map((product) => (
+                <Item key={product.id}>
+                  <div>
+                    <Image
+                      src={product.imageUrl}
+                      alt={`foto da ${product.name}`}
+                      width={100}
+                      height={80}
+                    />
+                  </div>
+                  <h4>{product.name}</h4>
+                  <h3>{product.price}</h3>
+                  <button>Remover</button>
+                </Item>
+              ))}
             </ItemsContainer>
             <TotalContainer>
               <p>Quantidade</p>

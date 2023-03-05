@@ -20,6 +20,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
+    // adicionar itens no carrinho
+    // remover itens do carrinho
+    // Problema ao clicar no handBag do produto, já e redirecionado para pagina especifica do produto
     <CartProvider
       shouldPersist={false}
       currency="BRL"

@@ -11,17 +11,23 @@ import { stripe } from '../lib/stripe'
 import Stripe from 'stripe'
 import Head from 'next/head'
 import { Handbag } from 'phosphor-react'
+import { useShoppingCart } from 'use-shopping-cart'
+
+type ProductType = {
+  id: string
+  sku: string
+  name: string
+  imageUrl: string
+  price: number
+  currency: string
+}
 
 interface HomeProps {
-  product: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-  }[]
+  product: ProductType[]
 }
 
 export default function Home({ product }: HomeProps) {
+  const { addItem } = useShoppingCart()
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -37,6 +43,10 @@ export default function Home({ product }: HomeProps) {
     },
   })
 
+  function handleAddProduct(product: ProductType) {
+    addItem(product)
+  }
+
   return (
     <>
       <Head>
@@ -48,6 +58,7 @@ export default function Home({ product }: HomeProps) {
           <Product
             href={`/product/${product.id}`}
             key={product.id}
+            onClick={() => handleAddProduct(product)}
             className="keen-slider__slide"
             prefetch={false}
           >
@@ -81,12 +92,14 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       id: product.id,
+      sku: String(Math.random().toFixed(3)),
       name: product.name,
       imageUrl: product.images[0],
       price: new Intl.NumberFormat('pt-br', {
         style: 'currency',
         currency: 'BRL',
       }).format((price.unit_amount as number) / 100),
+      currency: 'BRL',
     }
   })
 

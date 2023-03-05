@@ -1,5 +1,16 @@
 import { styled } from '../../styles'
 
+export const Overlay = styled('div', {
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100vh',
+  backgroundColor: '$gray900',
+  opacity: '0.7',
+  zIndex: '999999',
+})
+
 export const DialogCartContainer = styled('div', {
   width: '100%',
   maxWidth: '30rem',
@@ -30,17 +41,6 @@ export const DialogCartContainer = styled('div', {
   '@bp1': {
     padding: '1.5rem',
   },
-})
-
-export const Overlay = styled('div', {
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  width: '100%',
-  height: '100vh',
-  backgroundColor: '$gray900',
-  opacity: '0.2',
-  zIndex: '999999',
 })
 
 export const ItemsContainer = styled('div', {
@@ -88,11 +88,18 @@ export const Item = styled('div', {
   div: {
     gridArea: 'img',
 
+    display: 'flex',
+    alignItems: 'center',
+
     width: '101.94px',
     height: ' 93px',
 
     background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
     borderRadius: '8px',
+
+    img: {
+      objectFill: 'cover',
+    },
   },
 
   '@bp1': {

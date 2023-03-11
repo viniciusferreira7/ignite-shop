@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import { X } from 'phosphor-react'
-import { useEffect, useState } from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
-import { CartDetails, CartEntry } from 'use-shopping-cart/core'
 import {
   DialogCartContainer,
   FinishButton,
@@ -11,15 +9,6 @@ import {
   Overlay,
   TotalContainer,
 } from './styles'
-
-type ProductType = {
-  id: string
-  sku: string
-  name: string
-  imageUrl: string
-  price: number
-  currency: string
-}
 
 interface DialogCartProps {
   cartIsOpen: boolean
@@ -31,15 +20,6 @@ export function DialogCart({
   handleCloseOrOpenCart,
 }: DialogCartProps) {
   const { cartDetails } = useShoppingCart()
-  const [allProducts, setAllProducts] = useState<(ProductType | CartEntry)[]>(
-    [],
-  )
-
-  useEffect(() => {
-    for (const [key, value] of Object.entries(cartDetails as CartDetails)) {
-      setAllProducts((state) => [...state, value])
-    }
-  }, [cartDetails])
 
   return (
     <>
@@ -52,7 +32,7 @@ export function DialogCart({
             </div>
             <h2>Sacola de compras</h2>
             <ItemsContainer>
-              {allProducts.map((product) => (
+              {Object.values(cartDetails ?? {}).map((product) => (
                 <Item key={product.id}>
                   <div>
                     <Image

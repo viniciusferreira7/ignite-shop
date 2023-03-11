@@ -60,6 +60,7 @@ export const ItemsContainer = styled('div', {
 
 export const Item = styled('div', {
   display: 'grid',
+  justifyContent: 'left',
   gridTemplateAreas: `'img h4' 'img h3' 'img button'`,
 
   h4: {
@@ -93,6 +94,7 @@ export const Item = styled('div', {
 
     width: '101.94px',
     height: ' 93px',
+    marginRight: '1.5rem',
 
     background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
     borderRadius: '8px',

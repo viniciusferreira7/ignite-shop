@@ -19,9 +19,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     // remover itens do carrinho
-    // Problema do cartCount e resetado ao ir para pagina especifica
     <CartProvider
-      shouldPersist={false}
+      shouldPersist
       currency="BRL"
       cartMode="checkout-session"
       stripe={process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string}

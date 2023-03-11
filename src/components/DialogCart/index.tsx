@@ -19,7 +19,11 @@ export function DialogCart({
   cartIsOpen,
   handleCloseOrOpenCart,
 }: DialogCartProps) {
-  const { cartDetails } = useShoppingCart()
+  const { cartDetails, removeItem } = useShoppingCart()
+
+  function handleRemoveItem(id: string) {
+    removeItem(id)
+  }
 
   return (
     <>
@@ -42,9 +46,16 @@ export function DialogCart({
                       height={80}
                     />
                   </div>
-                  <h4>{product.name}</h4>
+                  <h4>
+                    {product.name}{' '}
+                    <strong>
+                      {product.quantity ? `x${product.quantity}` : null}
+                    </strong>
+                  </h4>
                   <h3>{product.price}</h3>
-                  <button>Remover</button>
+                  <button onClick={() => handleRemoveItem(product.id)}>
+                    Remover
+                  </button>
                 </Item>
               ))}
             </ItemsContainer>

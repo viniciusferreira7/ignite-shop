@@ -44,7 +44,7 @@ export default function Home({ product }: HomeProps) {
   })
 
   function handleAddProduct(product: ProductType) {
-    addItem(product)
+    addItem(product, { count: 1 })
   }
 
   return (

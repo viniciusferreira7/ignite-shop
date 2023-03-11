@@ -18,7 +18,6 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    // remover itens do carrinho
     <CartProvider
       shouldPersist
       currency="BRL"

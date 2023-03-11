@@ -69,6 +69,11 @@ export const Item = styled('div', {
     fontSize: '1.125rem',
     fontWeight: '400',
     color: '$gray300',
+
+    strong: {
+      fontSize: '0.9rem',
+      color: '$green300',
+    },
   },
 
   h3: {
@@ -81,6 +86,8 @@ export const Item = styled('div', {
   button: {
     all: 'unset',
     gridArea: 'button',
+
+    cursor: 'pointer',
 
     color: '$green500',
     fontWeight: '700',

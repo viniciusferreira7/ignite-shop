@@ -4,6 +4,7 @@ import { Amount, HeaderContainer, TriggerIcon } from './styles'
 
 import logoImg from '../../assets/logo.svg'
 import { useShoppingCart } from 'use-shopping-cart'
+import Link from 'next/link'
 
 interface HeaderProps {
   handleCloseOrOpenCart: () => void
@@ -14,7 +15,9 @@ export function Header({ handleCloseOrOpenCart }: HeaderProps) {
 
   return (
     <HeaderContainer>
-      <Image src={logoImg} alt="Logo do ignite" />
+      <Link href="/">
+        <Image src={logoImg} alt="Logo do ignite" />
+      </Link>
       <TriggerIcon onClick={handleCloseOrOpenCart}>
         <Handbag size={24} weight="regular" />
         <Amount>{cartCount}</Amount>

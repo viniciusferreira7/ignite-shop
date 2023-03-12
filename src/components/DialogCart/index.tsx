@@ -19,11 +19,16 @@ export function DialogCart({
   cartIsOpen,
   handleCloseOrOpenCart,
 }: DialogCartProps) {
-  const { cartDetails, removeItem } = useShoppingCart()
+  const { totalPrice, cartCount, cartDetails, removeItem } = useShoppingCart()
 
   function handleRemoveItem(id: string) {
     removeItem(id)
   }
+
+  const totalPriceConverted = new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format((totalPrice as number) / 100)
 
   return (
     <>
@@ -34,40 +39,46 @@ export function DialogCart({
             <div>
               <X size={24} onClick={handleCloseOrOpenCart} />
             </div>
-            <h2>Sacola de compras</h2>
-            <ItemsContainer>
-              {Object.values(cartDetails ?? {}).map((product) => (
-                <Item key={product.id}>
-                  <div>
-                    <Image
-                      src={product.imageUrl}
-                      alt={`foto da ${product.name}`}
-                      width={100}
-                      height={80}
-                    />
-                  </div>
-                  <h4>
-                    {product.name}{' '}
-                    <strong>
-                      {product.quantity ? `x${product.quantity}` : null}
-                    </strong>
-                  </h4>
-                  <h3>{product.price}</h3>
-                  <button onClick={() => handleRemoveItem(product.id)}>
-                    Remover
-                  </button>
-                </Item>
-              ))}
-            </ItemsContainer>
-            <TotalContainer>
-              <p>Quantidade</p>
-              <p>3 itens</p>
-              <p>Valor total</p>
-              <p>R$ 270,00</p>
-            </TotalContainer>
-            <FinishButton>
-              <strong>Finalizar compra</strong>
-            </FinishButton>
+            {(cartCount as number) > 0 ? (
+              <>
+                <h2>Sacola de compras</h2>
+                <ItemsContainer>
+                  {Object.values(cartDetails ?? {}).map((product) => (
+                    <Item key={product.id}>
+                      <div>
+                        <Image
+                          src={product.imageUrl}
+                          alt={`foto da ${product.name}`}
+                          width={100}
+                          height={80}
+                        />
+                      </div>
+                      <h4>
+                        {product.name}{' '}
+                        <strong>
+                          {product.quantity ? `x${product.quantity}` : null}
+                        </strong>
+                      </h4>
+                      <h3>{product.unit_amount}</h3>
+                      <button onClick={() => handleRemoveItem(product.id)}>
+                        Remover
+                      </button>
+                    </Item>
+                  ))}
+                </ItemsContainer>
+                <TotalContainer>
+                  <p>Quantidade</p>
+                  <p>{cartCount} itens</p>
+                  <p>Valor total</p>
+                  <p>{totalPriceConverted}</p>
+                </TotalContainer>
+                <FinishButton>
+                  <strong>Finalizar compra</strong>
+                </FinishButton>
+              </>
+            ) : (
+              <h3>Seu carrinho está vazio...</h3>
+            )}
           </DialogCartContainer>
         </>
       ) : null}

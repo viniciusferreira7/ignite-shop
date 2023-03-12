@@ -35,7 +35,15 @@ export const DialogCartContainer = styled('div', {
 
   h2: {
     margin: '1.5rem 0 2rem 0',
-    fontSize: '1.25rem',
+    fontSize: '$lg',
+  },
+
+  '& > h3': {
+    fontSize: '$xl',
+    color: '$white',
+    position: 'absolute',
+    top: '50%',
+    left: '10%',
   },
 
   '@bp1': {

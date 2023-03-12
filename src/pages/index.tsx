@@ -19,6 +19,7 @@ type ProductType = {
   name: string
   imageUrl: string
   price: number
+  unit_amount: string
   currency: string
 }
 
@@ -70,7 +71,7 @@ export default function Home({ product }: HomeProps) {
             />
             <footer>
               <strong>{product.name}</strong>
-              <span>{product.price}</span>
+              <span>{product.unit_amount}</span>
               <div title="Comprar">
                 <Handbag size={32} weight="bold" />
               </div>
@@ -95,7 +96,8 @@ export const getStaticProps: GetStaticProps = async () => {
       sku: String(Math.random().toFixed(3)),
       name: product.name,
       imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-br', {
+      price: price.unit_amount,
+      unit_amount: new Intl.NumberFormat('pt-br', {
         style: 'currency',
         currency: 'BRL',
       }).format((price.unit_amount as number) / 100),

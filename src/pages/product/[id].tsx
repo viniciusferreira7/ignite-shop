@@ -20,7 +20,8 @@ interface ProductProps {
     id: string
     name: string
     imageUrl: string
-    price: string
+    price: number
+    unit_amount: string
     description: string
     defaultPriceId: string
   }
@@ -64,7 +65,7 @@ export default function Product({ product }: ProductProps) {
         </ImageContainer>
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{product.unit_amount}</span>
           <p>{product.description}</p>
           <button
             disabled={isCreatingCheckoutSection}

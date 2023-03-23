@@ -1,5 +1,7 @@
+import axios from 'axios'
 import Image from 'next/image'
 import { X } from 'phosphor-react'
+import { useState } from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
 import {
   DialogCartContainer,
@@ -20,6 +22,22 @@ export function DialogCart({
   handleCloseOrOpenCart,
 }: DialogCartProps) {
   const { totalPrice, cartCount, cartDetails, removeItem } = useShoppingCart()
+  const [isCreatingCheckoutSection, setIsCreatingCheckoutSection] =
+    useState(false)
+
+  async function handleBuyProduct() {
+    // try {
+    //   setIsCreatingCheckoutSection(true)
+    //   const response = await axios.post('/api/checkout', {
+    //     priceId: product.defaultPriceId,
+    //   })
+    //   const { checkoutUrl } = response.data
+    //   window.location.href = checkoutUrl
+    // } catch (error) {
+    //   setIsCreatingCheckoutSection(false)
+    //   alert('Falha ao redirecionar ao checkout')
+    // }
+  }
 
   function handleRemoveItem(id: string) {
     removeItem(id)

@@ -25,18 +25,22 @@ export function DialogCart({
   const [isCreatingCheckoutSection, setIsCreatingCheckoutSection] =
     useState(false)
 
+  console.log(cartDetails)
+
   async function handleBuyProduct() {
-    // try {
-    //   setIsCreatingCheckoutSection(true)
-    //   const response = await axios.post('/api/checkout', {
-    //     priceId: product.defaultPriceId,
-    //   })
-    //   const { checkoutUrl } = response.data
-    //   window.location.href = checkoutUrl
-    // } catch (error) {
-    //   setIsCreatingCheckoutSection(false)
-    //   alert('Falha ao redirecionar ao checkout')
-    // }
+    try {
+      setIsCreatingCheckoutSection(true)
+
+      const response = await axios.post('/api/checkout', {
+        cartDetails,
+      })
+
+      const { checkoutUrl } = response.data
+      window.location.href = checkoutUrl
+    } catch (error) {
+      setIsCreatingCheckoutSection(false)
+      alert('Falha ao redirecionar ao checkout')
+    }
   }
 
   function handleRemoveItem(id: string) {
@@ -90,7 +94,10 @@ export function DialogCart({
                   <p>Valor total</p>
                   <p>{totalPriceConverted}</p>
                 </TotalContainer>
-                <FinishButton>
+                <FinishButton
+                  disabled={isCreatingCheckoutSection}
+                  onClick={handleBuyProduct}
+                >
                   <strong>Finalizar compra</strong>
                 </FinishButton>
               </>

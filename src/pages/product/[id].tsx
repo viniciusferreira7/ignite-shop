@@ -14,6 +14,7 @@ import Stripe from 'stripe'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Head from 'next/head'
+import { useShoppingCart } from 'use-shopping-cart'
 
 interface ProductProps {
   product: {
@@ -28,6 +29,7 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const { cartDetails } = useShoppingCart()
   const { isFallback } = useRouter()
   const [isCreatingCheckoutSection, setIsCreatingCheckoutSection] =
     useState(false)
@@ -37,7 +39,7 @@ export default function Product({ product }: ProductProps) {
       setIsCreatingCheckoutSection(true)
 
       const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
+        cartDetails,
       })
 
       const { checkoutUrl } = response.data

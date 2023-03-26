@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { priceId } = req.body
+  const { cartDetails } = req.body
 
   if (req.method === 'GET') {
     return res.status(405).json({ error: 'Not Allowed' })

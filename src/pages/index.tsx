@@ -21,6 +21,7 @@ type ProductType = {
   price: number
   unit_amount: string
   currency: string
+  price_id: Stripe.Price
 }
 
 interface HomeProps {
@@ -45,7 +46,7 @@ export default function Home({ product }: HomeProps) {
   })
 
   function handleAddProduct(product: ProductType) {
-    addItem(product, { count: 1 })
+    addItem({ ...product, id: product.price_id.id }, { count: 1 })
   }
 
   return (
@@ -68,6 +69,7 @@ export default function Home({ product }: HomeProps) {
               width={520}
               height={480}
               alt="Camiseta da Rocketseat"
+              priority
             />
             <footer>
               <strong>{product.name}</strong>
@@ -102,6 +104,7 @@ export const getStaticProps: GetStaticProps = async () => {
         currency: 'BRL',
       }).format((price.unit_amount as number) / 100),
       currency: 'BRL',
+      price_id: price,
     }
   })
 

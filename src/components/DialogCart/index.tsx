@@ -25,7 +25,17 @@ export function DialogCart({
   const [isCreatingCheckoutSection, setIsCreatingCheckoutSection] =
     useState(false)
 
-  console.log(cartDetails)
+  type ItemsType = {
+    id: string
+    quantity: number
+  }
+
+  const items: ItemsType[] = []
+
+  // eslint-disable-next-line no-unused-vars
+  for (const [key, value] of Object.entries(cartDetails ?? {})) {
+    items.push(value)
+  }
 
   async function handleBuyProduct() {
     try {

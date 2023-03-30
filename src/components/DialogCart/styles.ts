@@ -186,4 +186,14 @@ export const FinishButton = styled('button', {
     transaction: 'all 0.2s ease-in-out',
     backgroundColor: '$green300',
   },
+
+  '&:disabled': {
+    opacity: 0.6,
+    cursor: 'not-allowed',
+  },
+
+  '&:not(:disabled):hover': {
+    transaction: 'all 2.2s ease-in-out',
+    backgroundColor: '$green300',
+  },
 })

@@ -8,13 +8,13 @@ import { ImageContainer, SuccessContainer } from '../styles/pages/success'
 
 interface SuccessProps {
   customerName: string
-  product: {
+  listItems: {
     name: string
     imageUrl: string
-  }
+  }[]
 }
 
-export default function Success({ product, customerName }: SuccessProps) {
+export default function Success({ customerName, listItems }: SuccessProps) {
   return (
     <>
       <Head>
@@ -24,12 +24,19 @@ export default function Success({ product, customerName }: SuccessProps) {
       <SuccessContainer>
         <h1>Compra efetuada</h1>
         <ImageContainer>
-          <Image src={product.imageUrl} alt="" width={120} height={110} />
+          {listItems.map((item) => (
+            <Image
+              key={item.name}
+              src={item.imageUrl}
+              alt=""
+              width={120}
+              height={110}
+            />
+          ))}
         </ImageContainer>
         <p>
-          Uhuul <strong>{customerName}</strong>, sua
-          <strong> {product.name} </strong>
-          já está a caminho da sua casa.
+          Uhuul <strong>{customerName}</strong>, sua compra de{' '}
+          {listItems.length} camisetas já está a caminho da sua casa.
         </p>
         <Link href="/">Voltar ao catálogo</Link>
       </SuccessContainer>
@@ -49,20 +56,22 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
   const sessionId = String(query.session_id) // or  query.session_id as string | undefined
 
-  const response = await stripe.checkout.sessions.retrieve(sessionId, {
-    expand: ['line_items', 'line_items.data.price.product'],
-  })
+  const responseList = await stripe.checkout.sessions.listLineItems(sessionId)
+  const responseCustomerName = await stripe.checkout.sessions.retrieve(
+    sessionId,
+  )
 
-  const customerName = response.customer_details?.name
-  const product = response.line_items?.data[0].price?.product as Stripe.Product
+  const customerName = responseCustomerName.customer_details?.name
+  // // const product = response.line_items?.data[0].price?.product as Stripe.Product
+  console.log(responseList)
+
+  // Pegar a url da imagem de cada item comprado para exibir na página
+  // Ler a documentação do stripe checkout sessions e expand response
 
   return {
     props: {
       customerName,
-      product: {
-        name: product.name,
-        imageUrl: product.images[0],
-      },
+      listItems: [responseList.data],
     },
   }
 }

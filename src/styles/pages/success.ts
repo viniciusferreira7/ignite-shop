@@ -13,6 +13,10 @@ export const SuccessContainer = styled('main', {
     color: '$gray100',
   },
 
+  strong: {
+    textTransform: 'capitalize',
+  },
+
   p: {
     fontSize: '$xl',
     color: '$gray300',

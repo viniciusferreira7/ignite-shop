@@ -2,15 +2,26 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import Stripe from 'stripe'
 import { stripe } from '../lib/stripe'
-import { ImageContainer, SuccessContainer } from '../styles/pages/success'
+import {
+  GalleryContainer,
+  ImageContainer,
+  ListContainer,
+  SuccessContainer,
+} from '../styles/pages/success'
+import { Check } from 'phosphor-react'
 
 interface SuccessProps {
   customerName: string
   listItems: {
-    name: string
-    imageUrl: string
+    price: {
+      id: string
+      product: {
+        name: string
+        images: string[]
+      }
+    }
+    quantity: number
   }[]
 }
 
@@ -22,22 +33,31 @@ export default function Success({ customerName, listItems }: SuccessProps) {
         <meta name="robots" content="noindex" />
       </Head>
       <SuccessContainer>
-        <h1>Compra efetuada</h1>
-        <ImageContainer>
+        <GalleryContainer>
           {listItems.map((item) => (
-            <Image
-              key={item.name}
-              src={item.imageUrl}
-              alt=""
-              width={120}
-              height={110}
-            />
+            <ImageContainer key={item.price.id}>
+              <Image
+                src={item.price.product.images[0]}
+                alt={item.price.product.name}
+                width={120}
+                height={110}
+              />
+            </ImageContainer>
           ))}
-        </ImageContainer>
+        </GalleryContainer>
+        <h1>Compra efetuada</h1>
         <p>
-          Uhuul <strong>{customerName}</strong>, sua compra de{' '}
-          {listItems.length} camisetas já está a caminho da sua casa.
+          Uhuul <strong>{customerName}</strong>, você comprou:
         </p>
+        {listItems.map((item) => (
+          <ListContainer key={item.price.id}>
+            <li>
+              <Check weight="bold" /> {item.price.product.name}{' '}
+              <strong>x{item.quantity}</strong>
+            </li>
+          </ListContainer>
+        ))}
+        <p>As camisetas já está a caminho da sua casa.</p>
         <Link href="/">Voltar ao catálogo</Link>
       </SuccessContainer>
     </>
@@ -56,22 +76,19 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
   const sessionId = String(query.session_id) // or  query.session_id as string | undefined
 
-  const responseList = await stripe.checkout.sessions.listLineItems(sessionId)
-  const responseCustomerName = await stripe.checkout.sessions.retrieve(
-    sessionId,
-  )
+  const response = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ['line_items', 'line_items.data.price.product'],
+  })
 
-  const customerName = responseCustomerName.customer_details?.name
-  // // const product = response.line_items?.data[0].price?.product as Stripe.Product
-  console.log(responseList)
+  const customerName = response.customer_details?.name
+  const listItems = response.line_items?.data
 
-  // Pegar a url da imagem de cada item comprado para exibir na página
-  // Ler a documentação do stripe checkout sessions e expand response
+  console.log(response)
 
   return {
     props: {
       customerName,
-      listItems: [responseList.data],
+      listItems,
     },
   }
 }

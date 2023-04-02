@@ -13,10 +13,6 @@ export const SuccessContainer = styled('main', {
     color: '$gray100',
   },
 
-  strong: {
-    textTransform: 'capitalize',
-  },
-
   p: {
     fontSize: '$xl',
     color: '$gray300',
@@ -28,8 +24,8 @@ export const SuccessContainer = styled('main', {
 
   a: {
     display: 'block',
-    paddingTop: '5rem',
-    fontSize: '$lg',
+    marginTop: '2rem',
+    fontSize: '$xl',
     color: '$green500',
     textDecoration: 'none',
     fontWeight: 'bold',
@@ -50,13 +46,13 @@ export const GalleryContainer = styled('section', {
   padding: '0.25rem',
   marginBottom: '2rem',
 })
+
 export const ImageContainer = styled('main', {
   width: '100%',
-  maxWidth: 130,
+  maxWidth: 140,
   height: 145,
   background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100% )',
-  borderRadius: 8,
-  padding: '0.25rem',
+  borderRadius: 99999,
 
   display: 'flex',
   alignItems: 'center',

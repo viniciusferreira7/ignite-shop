@@ -40,6 +40,16 @@ export const SuccessContainer = styled('main', {
   },
 })
 
+export const GalleryContainer = styled('section', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+
+  width: '100%',
+  height: 145,
+  padding: '0.25rem',
+  marginBottom: '2rem',
+})
 export const ImageContainer = styled('main', {
   width: '100%',
   maxWidth: 130,
@@ -51,9 +61,36 @@ export const ImageContainer = styled('main', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginTop: '4rem',
+
+  boxShadow: '0px 0px 60px 0px #000000CC',
+
+  marginLeft: '-48px',
+
+  '&:first-of-type': {
+    marginLeft: 0,
+  },
 
   img: {
     objectFit: 'cover',
+  },
+})
+
+export const ListContainer = styled('ul', {
+  fontSize: '$xl',
+  color: '$gray300',
+  maxWidth: 560,
+  textAlign: 'center',
+  marginTop: '1rem',
+  lineHeight: 1,
+  listStylePosition: 'inside',
+  listStyleType: 'none',
+
+  svg: {
+    color: '$green300',
+  },
+
+  strong: {
+    fontSize: '1.6rem',
+    color: '$green300',
   },
 })
